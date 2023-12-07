@@ -1,2 +1,3 @@
 # rossler-synchronization
-A matlab project for studying the synchronization in Rossler "network".
+A Matlab project for studying the synchronization in the Rossler "network".
+A project for the course **Complex Dynamics Systems** during the Master's degree in *Artificial Intelligence and Automation Engineering* at the *University of Siena*.
