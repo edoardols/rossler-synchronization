@@ -1,0 +1,10 @@
+1) create an empty folder
+2) copy the repository link: https://github.com/edoardols/rossler-synchronization.git
+3) open the folder > source control > manage files > add the repository path
+
+if there isn't a .gitattributes file
+    go to https://it.mathworks.com/help/matlab/matlab_prog/set-up-git-source-control.html
+    and create that file using the provvided command
+
+commit: source control > view and commit changes
+push
