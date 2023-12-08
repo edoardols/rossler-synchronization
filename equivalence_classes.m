@@ -20,7 +20,7 @@ function eqc = equivalence_classes(trj)
         trj(i,j) = class;
         end
     end
-
+    trj
     % find the same equivalent class for each row
 
     % node one always in class 1
@@ -31,19 +31,16 @@ function eqc = equivalence_classes(trj)
     
     % Create a Matrix same number of rows as trj and as the number of column
     % the number of nodes
-    eq = zeros(size(trj,1),size(trj,2)/3);
+    eqc = zeros(size(trj,1),size(trj,2)/3);
 
-    % Set the first column to all ones
-    eq(:, 1) = 1;
-
-    for i=1:size(eq,1)
-    class = 2;
+    for i=1:size(eqc,1)
+        class = 1;
 
         % Skip the first node
-        for j=2:size(eq,2)
+        for j=2:size(eqc,2)
 
             % Check if the node will be in the same class as a previous one
-            for k=1:j
+            for k=1:j-1
 
                 % Two nodes are in the same class iff each component is in
                 % the same equivalent class
@@ -51,16 +48,15 @@ function eqc = equivalence_classes(trj)
                         trj(i,2 + 3*(j-1)) == trj(i,2 + 3*(k-1)) && ...
                         trj(i,3 + 3*(j-1)) == trj(i,3 + 3*(k-1)))
 
+                    if (eqc(i,k) == 0)
+                        eqc(i,k) = class;
+                        class = class + 1;
+                    end
+
                     % Set the same eq class
-                    eq(i,j) = eq(i,k);
+                    eqc(i,j) = eqc(i,k);
                     break
                 end
-            end
-
-            % If no similar node is found, set the node in a new class
-            if (eq(i,j) == 0)
-                eq(i,j) = class;
-                class = class + 1;
             end
         end
     end
