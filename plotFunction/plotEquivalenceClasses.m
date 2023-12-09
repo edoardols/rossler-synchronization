@@ -17,7 +17,7 @@ function plotEquivalenceClasses(Adj, eq_trj)
     title('Network Synchronization');
 
     % Create text object
-    textHandle = text(0.2, 0.2, sprintf('Iteration: %d', 0), 'HorizontalAlignment', 'center');
+    textHandle = text(1, 1, sprintf('Iteration: %d', 0), 'HorizontalAlignment', 'center');
 
     for k=1:size(eq_trj,1)
         for i = 1:N
@@ -25,10 +25,12 @@ function plotEquivalenceClasses(Adj, eq_trj)
             highlight(h, i, 'NodeColor', nodeColors(colorIndex));
         end
         pause(0.1);
+        % Force the figure to update without clearing
+        
         set(textHandle, 'String', sprintf('Iteration: %d of %d', k, size(eq_trj,1)));
         
-        % Force the figure to update without clearing
         drawnow;
+        
     end
     % Add a legend
     %legend({'Red', 'Green', 'Blue'});
