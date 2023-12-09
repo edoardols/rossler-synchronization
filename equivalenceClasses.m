@@ -46,7 +46,8 @@ function eqc = equivalenceClasses(trj)
                 if (trj(i,1 + 3*(j-1)) == trj(i,1 + 3*(k-1)) && ...
                         trj(i,2 + 3*(j-1)) == trj(i,2 + 3*(k-1)) && ...
                         trj(i,3 + 3*(j-1)) == trj(i,3 + 3*(k-1)))
-
+                    
+                    % Assign a eq class
                     if (eqc(i,k) == 0)
                         eqc(i,k) = class;
                         class = class + 1;
