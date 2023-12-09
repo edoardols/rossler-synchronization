@@ -1,4 +1,4 @@
-function dfnet = network(t, val, Adj, F, A, B, C)
+function dfnet = networkEquation(t, val, Adj, F, A, B, C)
 
     % Number of nodes in the Network
     N = size(Adj, 1);
@@ -14,7 +14,7 @@ function dfnet = network(t, val, Adj, F, A, B, C)
         [a,b,c] = deal(A(i),B(i),C(i));
 
         % Rossler system equation
-        df_i = rossler(vals(:,i), a, b, c);
+        df_i = rosslerEquation(vals(:,i), a, b, c);
 
         % add the "node" to the network
         dfnet = [dfnet,df_i];

@@ -17,7 +17,7 @@ function plotEquivalenceClasses(Adj, eq_trj)
     title('Network Synchronization');
 
     % Create text object
-    textHandle = text(-1, 1, sprintf('Iteration: %d', 0), 'HorizontalAlignment', 'center');
+    textHandle = text(0.2, 0.2, sprintf('Iteration: %d', 0), 'HorizontalAlignment', 'center');
 
     for k=1:size(eq_trj,1)
         for i = 1:N

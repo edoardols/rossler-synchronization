@@ -1,4 +1,4 @@
-function df = rossler(vals, a, b, c)
+function df = rosslerEquation(vals, a, b, c)
     %% Rossler system equation
 
     % vals is a 3x1 vector that contains the [u,v,z] at T-1
