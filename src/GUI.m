@@ -2,6 +2,7 @@ function GUI()
     % Inport Function
     addpath(genpath('plotFunction'))
     addpath(genpath('equationFunction'))
+    addpath(genpath('inputFunction'))
    
     % Reactive GUI
 

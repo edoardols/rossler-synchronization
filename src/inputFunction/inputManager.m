@@ -1,4 +1,4 @@
-function [N, Adj, CI, F, A, B, C] = InputManager(N, Adj, CI, F, A, B, C, SpecialCase)
+function [N, Adj, CI, F, A, B, C] = inputManager(N, Adj, CI, F, A, B, C, SpecialCase)
 
     InputWindow = figure('Name', 'Input Data', 'Position', [100, 100, 300, 400]);
     %% Check special cases
