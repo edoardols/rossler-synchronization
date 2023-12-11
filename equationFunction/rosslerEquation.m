@@ -14,7 +14,7 @@ function df = rosslerEquation(vals, a, b, c)
 
     % Paper
     %du = a*u + v;
-    %dv = -u -v;
+    %dv = -u -z;
     %dz = b + z*(v - c);
     
     df = [du; dv; dz];

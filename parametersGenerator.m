@@ -3,7 +3,8 @@ function [Adj, IC, A, B, C, F] = networkGenerator(N, symmetry, selfloop, a, b, c
     
     %% Adjecency Matrix
     % N number of node in the network
-    A = randi([0, 1], N, N);  % Generate a random binary matrix
+    % Generate a random binary matrix
+    A = randi([0, 1], N, N);
     if symmetry == 1
         % Make the matrix symmetric
         A = triu(A, 1) + triu(A, 1).';

@@ -20,6 +20,7 @@ function eqc = equivalenceClasses(trj)
         trj(i,j) = class;
         end
     end
+    trj
     % find the same equivalent class for each row
 
     % node one always in class 1
