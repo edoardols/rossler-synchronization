@@ -30,7 +30,7 @@ function GUI()
     btn3 = uicontrol('Style', 'pushbutton', 'String', 'Trajectories', 'Position', calculatePosition(button3Position, fig), 'Callback', @funzione3);
     btn4 = uicontrol('Style', 'pushbutton', 'String', 'Trajectories Same Over Space', 'Position', calculatePosition(button4Position, fig), 'Callback', @funzione4);
     buttons=[btn0,btn1,btn2,btn3,btn4];
-
+    VersionLabel = uicontrol('Style', 'text', 'String', 'V0.1.0 -11/12/2023', 'Position', [5, 5, 280, 20]);
     figureResize = 1;
 
     %% GUI Function
@@ -64,6 +64,7 @@ function GUI()
     
     % Check if there is a simulation
     sim = 0;
+    SpecialCase=1;
 
     % Initialize global variable
     t = 0;
@@ -83,16 +84,21 @@ function GUI()
             case 'Rossler Systems'
                 [Adj, IC, A, B, C, F] = parametersGenerator(2, 0, 0, 0.2, 0.2, 5.7, 1, 0, [0 0]);
                 Adj = [0 0; 0 0];
+                SpecialCase=1;
             case 'Chaotic Forcing'
                 [Adj, IC, A, B, C, F] = parametersGenerator(2, 0, 0, 0.2, 0.2, 5.7, 1, 0, [0 0]);
                 Adj = [0 1; 0 0];
+                SpecialCase=1;
             case 'Mutually coupled chaos'
                 [Adj, IC, A, B, C, F] = parametersGenerator(2, 0, 0, 0.2, 0.2, 5.7, 1, 0, [0 0]);
                 Adj = [0 1; 1 0];
+                SpecialCase=1;
             case 'Input System'
-                [N, Adj, IC, A, B, C, F] = inputManager(N, Adj, IC, F, A, B, C);
+                SpecialCase=0;
+                [N, Adj, IC, A, B, C, F] = InputManager(N, Adj, IC, F, A, B, C,SpecialCase);
             case 'Random System'
-                [N, Adj, IC, A, B, C, F] = inputManager(N, Adj, IC, F, A, B, C);
+                SpecialCase=2;
+                [N, Adj, IC, A, B, C, F] = InputManager(N, Adj, IC, F, A, B, C,SpecialCase);
                 %[N, symmetry, selfloop, a, b, c, f, fRandom, fRange] = inputRandom(N, symmetry, selfloop, a, b, c, f, fRandom, fRange);
                 [Adj, IC, A, B, C, F] = parametersGenerator(N, 0, 0, 0.2, 0.2, 5.7, 1, 0, [0 10]);
         end
@@ -102,7 +108,8 @@ function GUI()
         set(buttons, 'ForegroundColor', 'black'); 
         set(btn0, 'ForegroundColor', 'green');
         disp('Updating parameters of network!');
-        [N, Adj, IC, A, B, C, F] = inputManager(N, Adj, IC, F, A, B, C);
+        [N, Adj, IC, A, B, C, F] = InputManager(N, Adj, IC, F, A, B, C,SpecialCase);
+       
     end
 
     function funzione1(~, ~)
@@ -148,5 +155,8 @@ function GUI()
         plotSamePhaseSpace(trj, N);
     end
 
+    
 end
+
+
 
