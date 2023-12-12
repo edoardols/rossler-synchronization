@@ -5,5 +5,5 @@ A project for the course **Complex Dynamics Systems** during the Master's degree
 ## How To Use
 
 Open src folder and run the script
-- main for using the GUI
-- mainNoGUI for operation on parameters (like doing the mean, etc)
+- main.m for using the GUI
+- mainNoGUI.m for operation on parameters (like doing the mean, etc)
