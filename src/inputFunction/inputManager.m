@@ -6,7 +6,7 @@ function [N, Adj, CI, F, A, B, C] = inputManager(N, Adj, CI, F, A, B, C, Special
         Style = 'text';
         TextColor = 'blue';
         EnableState = 'inactive'; 
-        Visibility = 'on'
+        Visibility = 'on';
     elseif SpecialCase == 2
         EnableState = 'on';
         TextColor = 'black';
@@ -58,14 +58,15 @@ function [N, Adj, CI, F, A, B, C] = inputManager(N, Adj, CI, F, A, B, C, Special
         disp('Before conversion:');
 
         try
+            Checker = 0
             N = str2num(inputNval);
             if N > 0 && N < 20
                disp('N setted');
                set(Nval, 'ForegroundColor', 'green'); 
                disp(Nval);
+               Checker = Checker+1;
             else
-               set(Nval, 'ForegroundColor', 'red'); 
-               errordlg('N value is wrong!'); 
+               set(Nval, 'ForegroundColor', 'red');
             end
             
             %% Adj matrix
@@ -74,9 +75,9 @@ function [N, Adj, CI, F, A, B, C] = inputManager(N, Adj, CI, F, A, B, C, Special
                disp('Adj is a square matrix:');
                set(Adjmatrix, 'ForegroundColor', 'green'); 
                disp(Adj);
+               Checker = Checker+1;
             else
                set(Adjmatrix, 'ForegroundColor', 'red'); 
-               errordlg('Adjmatrix must be a non-empty square matrix.'); 
             end
             %% Initial condition
             CI = str2num(inputCI);
@@ -84,9 +85,9 @@ function [N, Adj, CI, F, A, B, C] = inputManager(N, Adj, CI, F, A, B, C, Special
                disp('CI setted');
                set(CImatrix, 'ForegroundColor', 'green'); 
                disp(CI);
+               Checker = Checker+1;
             else
                set(CImatrix, 'ForegroundColor', 'red'); 
-               errordlg('CI wrong!'); 
             end
             %% F vector
             F = str2num(inputF);
@@ -94,43 +95,45 @@ function [N, Adj, CI, F, A, B, C] = inputManager(N, Adj, CI, F, A, B, C, Special
                disp('F setted');
                set(Fmatrix, 'ForegroundColor', 'green'); 
                disp(Fmatrix);
+               Checker = Checker+1;
             else
                set(Fmatrix, 'ForegroundColor', 'red'); 
-               errordlg('Fmatrix wrong!'); 
-            end;
+            end
             %% A vector
             A = str2num(inputA);
             if ~isempty(A) && ismatrix(A) && size(A, 1) == 1 && size(A, 2) == N
                disp('A setted');
                set(parsAvec, 'ForegroundColor', 'green'); 
                disp(A);
+               Checker = Checker+1;
             else
                set(parsAvec, 'ForegroundColor', 'red'); 
-               errordlg('A vector wrong!'); 
-            end;
+            end
             %% B vector
             B = str2num(inputB);
             if ~isempty(B) && ismatrix(B) && size(B, 1) == 1 && size(B, 2) == N
                disp('B setted');
                set(parsBvec, 'ForegroundColor', 'green'); 
                disp(B);
+               Checker = Checker+1;
             else
                set(parsBvec, 'ForegroundColor', 'red'); 
-               errordlg('B vector wrong!'); 
-            end;
+            end
             %% C vector
             C = str2num(inputC);
             if ~isempty(C) && ismatrix(C) && size(C, 1) == 1 && size(C, 2) == N
                disp('C setted');
                set(parsCvec, 'ForegroundColor', 'green'); 
                disp(C);
+               Checker = Checker+1;
             else
                set(parsCvec, 'ForegroundColor', 'red'); 
-               errordlg('C vector wrong!'); 
-            end;
-            set(confirmMessage, 'String', 'All data are setted!', 'ForegroundColor', 'green');
-            drawnow; 
-            
+            end
+
+            if Checker == 7
+             set(confirmMessage, 'String', 'All data are setted!', 'ForegroundColor', 'green');
+             drawnow; 
+            end
            
         catch
             errordlg('Input error, retry!');
