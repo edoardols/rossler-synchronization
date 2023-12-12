@@ -1,4 +1,4 @@
-function [Adj, IC, A, B, C, F] = networkGenerator(N, symmetry, selfloop, a, b, c, f, fRandom, fRange)
+function [Adj, IC, A, B, C, F] = parametersGenerator(N, symmetry, selfloop, a, b, c, f, fRandom, fRange)
     % Generate random value for the network
     
     %% Adjecency Matrix

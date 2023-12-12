@@ -7,4 +7,5 @@ if there isn't a .gitattributes file
     and create that file using the provvided command
 
 commit: source control > view and commit changes
-push
+push: send the commit to the branch 
+pull: get update from the branch

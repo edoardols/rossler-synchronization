@@ -1,9 +1,12 @@
 clear
 close all
 
-addpath(genpath('plotFunction'))
-addpath(genpath('equationFunction'))
-addpath(genpath('inputFunction'))
+% Unix Systems
+addpath(genpath('src\app\functions'))
+% Windows Systems
+addpath(genpath('src/app/functions'))
+
+addpath(genpath('functions'))
 
 %% Graph and Network Definition
 % Adjacency Matrix
@@ -37,7 +40,11 @@ T = [0 12];
 
 %% Calls
 
+% plot of all the component over time
 plotOverTime(t, trj, N);
+
+% plot of each systems in the phase space
 plotPhaseSpace(trj, N);
-eqc = equivalenceClasses(trj);
-plotEquivalenceClasses(Adj, eqc);
+
+% plot of the syncronizzation network
+plotEquivalenceClasses(Adj, equivalenceClasses(trj));
