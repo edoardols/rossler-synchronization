@@ -9,5 +9,6 @@ Open src/app folder and run the script:
 - *mainScripting.m* for operation on parameters (like doing the mean, etc)
 
 ## Generate Matlab Documentation
-[HTML](https://it.mathworks.com/help/matlab/matlab_prog/publishing-matlab-code.html).
+[HTML](https://it.mathworks.com/help/matlab/matlab_prog/publishing-matlab-code.html)
+
 [publish method](https://it.mathworks.com/help/matlab/ref/publish.html)
