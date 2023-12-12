@@ -4,6 +4,6 @@ A project for the course **Complex Dynamics Systems** during the Master's degree
 
 ## How To Use
 
-Open src folder and run the script:
+Open src/app folder and run the script:
 - *main.m* for using the GUI
 - *mainScripting.m* for operation on parameters (like doing the mean, etc)
