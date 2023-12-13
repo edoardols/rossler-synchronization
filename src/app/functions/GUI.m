@@ -6,43 +6,52 @@ function GUI()
     disp('Hello world')
     %% Reactive GUI
     figureResize = 0;
-    fig = figure('Name', 'Simulations Toolbox', 'NumberTitle', 'off', 'Position', [200, 200, 300, 600], 'ResizeFcn', @resizeCallback);
+    fig = figure('Name', 'Simulations Toolbox', 'NumberTitle', 'off', 'Position', [200, 200, 500, 500], 'ResizeFcn', @resizeCallback);
     sgtitle('Simulation Toolbox','Color','r');
 
     %% Proportion
-    dropdown0Position = [0.2, 0.8, 0.6, 0.1];
+    dropdown0Position = [0.2, 0.85, 0.6, 0.05];
     
-    button0Position = [0.2, 0.7, 0.6, 0.1];
-    button1Position = [0.2, 0.6, 0.6, 0.1];
-    button2Position = [0.2, 0.5, 0.6, 0.1];
-    button3Position = [0.2, 0.4, 0.6, 0.1];
-    button4Position = [0.2, 0.3, 0.6, 0.1];
-    %button5Position = [%];
+    button0Position = [0.2, 0.80, 0.6, 0.05];
+    button1Position = [0.2, 0.75, 0.6, 0.05];
+    button2Position = [0.2, 0.70, 0.6, 0.05];
+    button3Position = [0.2, 0.65, 0.6, 0.05];
+    button4Position = [0.2, 0.60, 0.6, 0.05];
+    %button5Position = [0.2, 0.2, 0.6, 0.05];
+
+    parametersLabelPosition = [0.2, 0.50, 0.6, 0.05];
+    parametersBoxPosition = [0.2, 0.3, 0.6, 0.2];
+
+    commandWLabelPosition = [0.2, 0.22, 0.6, 0.05];
+    commandWBoxPosition = [0.2, 0.2, 0.6, 0.03];
+
+    versionLabelPosition = [0.2, 0.1, 0.6, 0.05];
+
     
     %% Create dropdown menu
     simList = {'Select an action:','Rossler Systems', 'Chaotic Forcing', 'Mutually coupled chaos', 'Input System', 'Random System'};
     dropd0 = uicontrol('Style', 'popupmenu', 'String', simList, 'Position', calculatePosition(dropdown0Position, fig), 'Callback', @updateSimulation);
     set(dropd0, 'Value', 1);
     %% Buttons
-    btn0 = uicontrol('Style', 'pushbutton', 'String', 'Update Input', 'Position', button0Position, 'Callback', @funzione0);
-    btn1 = uicontrol('Style', 'pushbutton', 'String', 'Graph Sync', 'Position', button1Position, 'Callback', @funzione1);
-    btn2 = uicontrol('Style', 'pushbutton', 'String', 'Component over time', 'Position', button2Position, 'Callback', @funzione2);
-    btn3 = uicontrol('Style', 'pushbutton', 'String', 'Trajectories', 'Position', button3Position, 'Callback', @funzione3);
-    btn4 = uicontrol('Style', 'pushbutton', 'String', 'Trajectories Same Over Space', 'Position',button4Position, 'Callback', @funzione4);
-    %btn5 = uicontrol('Style', 'pushbutton', 'String', 'To add', 'Position',button4Position, 'Callback', @funzione5);
+    btn0 = uicontrol('Style', 'pushbutton', 'String', 'Update Input', 'Position', calculatePosition(button0Position, fig), 'Callback', @funzione0);
+    btn1 = uicontrol('Style', 'pushbutton', 'String', 'Graph Sync', 'Position', calculatePosition(button1Position, fig), 'Callback', @funzione1);
+    btn2 = uicontrol('Style', 'pushbutton', 'String', 'Component over time', 'Position', calculatePosition(button2Position, fig), 'Callback', @funzione2);
+    btn3 = uicontrol('Style', 'pushbutton', 'String', 'Trajectories', 'Position', calculatePosition(button3Position, fig), 'Callback', @funzione3);
+    btn4 = uicontrol('Style', 'pushbutton', 'String', 'Trajectories Same Over Space', 'Position', calculatePosition(button4Position, fig), 'Callback', @funzione4);
+    %btn5 = uicontrol('Style', 'pushbutton', 'String', 'To add', 'Position', calculatePosition(button5Position, fig), 'Callback', @funzione5);
     buttons=[btn0,btn1,btn2,btn3,btn4];
   
     figureResize = 1;
 
-    %% Variable_Box
-    Variable_Label = uicontrol('Style', 'text', 'String', 'Network parameters: ', 'Position', [6, 180, 100, 16]);
-    Variable_box = uicontrol('Style', 'text', 'String', 'Hello world!', 'Position', [10, 90, 280, 90], 'BackgroundColor', 'white', 'HorizontalAlignment', 'left', 'FontSize', 8);
+    %% Parameters Box
+    Variable_Label = uicontrol('Style', 'text', 'String', 'Network parameters: ', 'Position', calculatePosition(parametersLabelPosition, fig));
+    Variable_box = uicontrol('Style', 'text', 'String', 'Hello world!', 'Position', calculatePosition(parametersBoxPosition, fig), 'BackgroundColor', 'white', 'HorizontalAlignment', 'left', 'FontSize', 8);
     
     %% Command Windows
-    CommandW_Label = uicontrol('Style', 'text', 'String', 'Command window: ', 'Position', [6, 65, 100, 16]);
-    CommandW_box = uicontrol('Style', 'text', 'String', 'Welcome user!', 'Position', [10, 50, 280, 15], 'BackgroundColor', 'white', 'HorizontalAlignment', 'left', 'FontSize', 8);
+    CommandW_Label = uicontrol('Style', 'text', 'String', 'Command window: ', 'Position', calculatePosition(commandWLabelPosition, fig));
+    CommandW_box = uicontrol('Style', 'text', 'String', 'Welcome user!', 'Position', calculatePosition(commandWBoxPosition, fig), 'BackgroundColor', 'white', 'HorizontalAlignment', 'left', 'FontSize', 8);
     %% Version label
-    VersionLabel = uicontrol('Style', 'text', 'String', 'V0.3.0', 'Position', [5, 5, 280, 20]);
+    VersionLabel = uicontrol('Style', 'text', 'String', 'V0.4.0', 'Position', calculatePosition(versionLabelPosition, fig));
    
  %-------------------------------------------------------------------------
     %% GUI Function
@@ -60,11 +69,20 @@ function GUI()
         end
         % Update positions
         set(dropd0, 'Position', calculatePosition(dropdown0Position, fig));
+
         set(btn0, 'Position', calculatePosition(button0Position, fig));
         set(btn1, 'Position', calculatePosition(button1Position, fig));
         set(btn2, 'Position', calculatePosition(button2Position, fig));
         set(btn3, 'Position', calculatePosition(button3Position, fig));
         set(btn4, 'Position', calculatePosition(button4Position, fig));
+        %set(btn5, 'Position', calculatePosition(button5Position, fig));
+
+        set(Variable_Label, 'Position', calculatePosition(parametersLabelPosition, fig));
+        set(Variable_box, 'Position', calculatePosition(parametersBoxPosition, fig));
+        set(CommandW_Label, 'Position', calculatePosition(commandWLabelPosition, fig));
+        set(CommandW_box, 'Position', calculatePosition(commandWBoxPosition, fig));
+        set(VersionLabel, 'Position', calculatePosition(versionLabelPosition, fig));
+        
     end
     
    
