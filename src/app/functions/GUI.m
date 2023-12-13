@@ -42,7 +42,7 @@ function GUI()
     CommandW_Label = uicontrol('Style', 'text', 'String', 'Command window: ', 'Position', [6, 65, 100, 16]);
     CommandW_box = uicontrol('Style', 'text', 'String', 'Welcome user!', 'Position', [10, 50, 280, 15], 'BackgroundColor', 'white', 'HorizontalAlignment', 'left', 'FontSize', 8);
     %% Version label
-    VersionLabel = uicontrol('Style', 'text', 'String', 'V0.1.2.0', 'Position', [5, 5, 280, 20]);
+    VersionLabel = uicontrol('Style', 'text', 'String', 'V0.3.0', 'Position', [5, 5, 280, 20]);
    
  %-------------------------------------------------------------------------
     %% GUI Function
