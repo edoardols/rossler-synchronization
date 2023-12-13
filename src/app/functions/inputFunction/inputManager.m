@@ -1,5 +1,5 @@
-function [N, Adj, CI, F, A, B, C] = inputManager(N, Adj, CI, F, A, B, C, SpecialCase)
-
+function [N, Adj, CI, F, A, B, C,Simulate] = inputManager(N, Adj, CI, F, A, B, C, SpecialCase)
+    Simulate = 0;
     InputWindow = figure('Name', 'Input Data', 'Position', [100, 100, 300, 400]);
     %% Check special cases
     if SpecialCase == 1
@@ -58,11 +58,13 @@ function [N, Adj, CI, F, A, B, C] = inputManager(N, Adj, CI, F, A, B, C, Special
         disp('Before conversion:');
 
         try
-            Checker = 0
+            Checker = 0;
+            
             N = str2num(inputNval);
             if N > 0 && N < 20
                disp('N setted');
-               set(Nval, 'ForegroundColor', 'green'); 
+               set(Nval, 'ForegroundColor', [0.4660 0.6740 0.1880]);
+               set(Nval, 'FontWeight', 'bold'); 
                disp(Nval);
                Checker = Checker+1;
             else
@@ -73,7 +75,8 @@ function [N, Adj, CI, F, A, B, C] = inputManager(N, Adj, CI, F, A, B, C, Special
             Adj = str2num(inputAdj);
             if ~isempty(Adj) && ismatrix(Adj) && size(Adj, 1) == size(Adj, 2)
                disp('Adj is a square matrix:');
-               set(Adjmatrix, 'ForegroundColor', 'green'); 
+               set(Adjmatrix, 'ForegroundColor', [0.4660 0.6740 0.1880]); 
+               set(Adjmatrix, 'FontWeight', 'bold'); 
                disp(Adj);
                Checker = Checker+1;
             else
@@ -83,7 +86,8 @@ function [N, Adj, CI, F, A, B, C] = inputManager(N, Adj, CI, F, A, B, C, Special
             CI = str2num(inputCI);
             if ~isempty(CI) && ismatrix(CI) && size(CI, 1) == N && size(CI, 2) == 3
                disp('CI setted');
-               set(CImatrix, 'ForegroundColor', 'green'); 
+               set(CImatrix, 'ForegroundColor', [0.4660 0.6740 0.1880]);
+               set(CImatrix, 'FontWeight', 'bold'); 
                disp(CI);
                Checker = Checker+1;
             else
@@ -93,7 +97,8 @@ function [N, Adj, CI, F, A, B, C] = inputManager(N, Adj, CI, F, A, B, C, Special
             F = str2num(inputF);
             if ~isempty(F) && ismatrix(F) && size(F, 1) == 1 && size(F, 2) == N
                disp('F setted');
-               set(Fmatrix, 'ForegroundColor', 'green'); 
+               set(Fmatrix, 'ForegroundColor', [0.4660 0.6740 0.1880]);
+               set(Fmatrix, 'FontWeight', 'bold'); 
                disp(Fmatrix);
                Checker = Checker+1;
             else
@@ -103,7 +108,8 @@ function [N, Adj, CI, F, A, B, C] = inputManager(N, Adj, CI, F, A, B, C, Special
             A = str2num(inputA);
             if ~isempty(A) && ismatrix(A) && size(A, 1) == 1 && size(A, 2) == N
                disp('A setted');
-               set(parsAvec, 'ForegroundColor', 'green'); 
+               set(parsAvec, 'ForegroundColor', [0.4660 0.6740 0.1880]); 
+               set(parsAvec, 'FontWeight', 'bold'); 
                disp(A);
                Checker = Checker+1;
             else
@@ -113,7 +119,8 @@ function [N, Adj, CI, F, A, B, C] = inputManager(N, Adj, CI, F, A, B, C, Special
             B = str2num(inputB);
             if ~isempty(B) && ismatrix(B) && size(B, 1) == 1 && size(B, 2) == N
                disp('B setted');
-               set(parsBvec, 'ForegroundColor', 'green'); 
+               set(parsBvec, 'ForegroundColor', [0.4660 0.6740 0.1880]); 
+               set(parsBvec, 'FontWeight', 'bold');
                disp(B);
                Checker = Checker+1;
             else
@@ -123,7 +130,8 @@ function [N, Adj, CI, F, A, B, C] = inputManager(N, Adj, CI, F, A, B, C, Special
             C = str2num(inputC);
             if ~isempty(C) && ismatrix(C) && size(C, 1) == 1 && size(C, 2) == N
                disp('C setted');
-               set(parsCvec, 'ForegroundColor', 'green'); 
+               set(parsCvec, 'ForegroundColor', [0.4660 0.6740 0.1880]); 
+               set(parsCvec, 'FontWeight', 'bold');
                disp(C);
                Checker = Checker+1;
             else
@@ -131,7 +139,9 @@ function [N, Adj, CI, F, A, B, C] = inputManager(N, Adj, CI, F, A, B, C, Special
             end
 
             if Checker == 7
-             set(confirmMessage, 'String', 'All data are setted!', 'ForegroundColor', 'green');
+             Simulate = 1;
+             set(confirmMessage, 'String', 'All data are setted!', 'ForegroundColor', [0.4660 0.6740 0.1880]);
+             set(confirmMessage, 'FontWeight', 'bold'); 
              drawnow; 
             end
            
