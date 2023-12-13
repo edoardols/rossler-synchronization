@@ -3,7 +3,7 @@ function GUI()
     addpath(genpath('plotFunction'))
     addpath(genpath('equationFunction'))
     addpath(genpath('inputFunction'))
-   
+    disp('Hello world')
     %% Reactive GUI
     figureResize = 0;
     fig = figure('Name', 'Simulations Toolbox', 'NumberTitle', 'off', 'Position', [200, 200, 300, 600], 'ResizeFcn', @resizeCallback);
