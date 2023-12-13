@@ -107,6 +107,7 @@ function GUI()
     end
 
     function funzione0(~, ~)
+        sim = 0;
         set(buttons, 'ForegroundColor', 'black'); 
         set(btn0, 'ForegroundColor', 'green');
         disp('Updating parameters of network!');
