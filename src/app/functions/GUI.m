@@ -3,7 +3,7 @@ function GUI()
     addpath(genpath('plotFunction'))
     addpath(genpath('equationFunction'))
     addpath(genpath('inputFunction'))
-    disp('Hello world')
+    
     %% Reactive GUI
     figureResize = 0;
     fig = figure('Name', 'Simulations Toolbox', 'NumberTitle', 'off', 'Position', [200, 200, 500, 500], 'ResizeFcn', @resizeCallback);
@@ -17,7 +17,7 @@ function GUI()
     button2Position = [0.2, 0.70, 0.6, 0.05];
     button3Position = [0.2, 0.65, 0.6, 0.05];
     button4Position = [0.2, 0.60, 0.6, 0.05];
-    %button5Position = [0.2, 0.2, 0.6, 0.05];
+    button5Position = [0.2, 0.55, 0.6, 0.05];
 
     parametersLabelPosition = [0.2, 0.50, 0.6, 0.05];
     parametersBoxPosition = [0.2, 0.3, 0.6, 0.2];
@@ -38,8 +38,8 @@ function GUI()
     btn2 = uicontrol('Style', 'pushbutton', 'String', 'Component over time', 'Position', calculatePosition(button2Position, fig), 'Callback', @funzione2);
     btn3 = uicontrol('Style', 'pushbutton', 'String', 'Trajectories', 'Position', calculatePosition(button3Position, fig), 'Callback', @funzione3);
     btn4 = uicontrol('Style', 'pushbutton', 'String', 'Trajectories Same Over Space', 'Position', calculatePosition(button4Position, fig), 'Callback', @funzione4);
-    %btn5 = uicontrol('Style', 'pushbutton', 'String', 'To add', 'Position', calculatePosition(button5Position, fig), 'Callback', @funzione5);
-    buttons=[btn0,btn1,btn2,btn3,btn4];
+    btn5 = uicontrol('Style', 'pushbutton', 'String', 'Node over time', 'Position', calculatePosition(button5Position, fig), 'Callback', @funzione5);
+    buttons=[btn0,btn1,btn2,btn3,btn4,btn5];
   
     figureResize = 1;
 
@@ -168,8 +168,7 @@ function GUI()
             Update_status('Choose an action!',1)
             return;
         end
-        set(buttons, 'ForegroundColor', 'black'); 
-        set(btn0, 'ForegroundColor', 'green');
+        ColorButton(btn0)
         [N, Adj, IC, F, A, B, C] = inputManager(N, Adj, IC, F, A, B, C, SpecialCase);
         Update_status('Parameters updated',0);
         Update_VariableBox(N, Adj, IC, F, A, B, C) 
@@ -186,8 +185,7 @@ function GUI()
             simulateInput()
         end
         Update_status('Plotting graph',0);
-        set(buttons, 'ForegroundColor', 'black'); 
-        set(btn1, 'ForegroundColor', 'green'); 
+        ColorButton(btn1)
         disp('Showing graphs sync!');
         eqc = equivalenceClasses(trj);
         plotEquivalenceClasses(Adj, eqc);
@@ -203,8 +201,7 @@ function GUI()
             simulateInput()
         end
         Update_status('Plotting components over time',0);
-        set(buttons, 'ForegroundColor', 'black'); 
-        set(btn2, 'ForegroundColor', 'green');
+        ColorButton(btn2)
         disp('Showing Compontens over time!');
         plotOverTime(t, trj, N);
         
@@ -219,8 +216,7 @@ function GUI()
             simulateInput()
         end
         Update_status('Plotting nodes in different phase spaces',0);
-        set(buttons, 'ForegroundColor', 'black'); 
-        set(btn3, 'ForegroundColor', 'green');
+        ColorButton(btn3)
         disp('Showing each trajectories in own phase space!');
         plotPhaseSpace(trj, N);
         
@@ -235,16 +231,25 @@ function GUI()
             simulateInput()
         end
         Update_status('Plotting in the same phase space',0);
-        set(buttons, 'ForegroundColor', 'black'); 
-        set(btn4, 'ForegroundColor', 'green');
+        ColorButton(btn4)
         disp('Showing each trajectories in same phase space!');
         plotSamePhaseSpace(trj, N);
         
     end
 
  %% Button: To add
-    % function funzione5(~, ~)   
-    % end
+    function funzione5(~, ~) 
+     if ActionOn == 0
+        Update_status('Choose an action!',1)
+        return;
+     end
+     if sim == 0
+        simulateInput()
+     end
+     Update_status('Plot your node over time!',0);
+     ColorButton(btn5)
+     NodeoverTime(t,trj);
+    end
 %--------------------------------------------------------------------------
     %% Update_VariableBox
     function Update_VariableBox(N, Adj, IC, F, A, B, C) 
@@ -274,5 +279,10 @@ function GUI()
       else
         Update_status('Simulation ended',2);
       end
+    end
+
+    function ColorButton(button)
+     set(buttons, 'ForegroundColor', 'black'); 
+     set(button, 'ForegroundColor',[0.4660 0.6740 0.1880],'FontWeight', 'bold'); 
     end
 end
