@@ -75,7 +75,7 @@ function GUI()
         set(btn2, 'Position', calculatePosition(button2Position, fig));
         set(btn3, 'Position', calculatePosition(button3Position, fig));
         set(btn4, 'Position', calculatePosition(button4Position, fig));
-        %set(btn5, 'Position', calculatePosition(button5Position, fig));
+        set(btn5, 'Position', calculatePosition(button5Position, fig));
 
         set(Variable_Label, 'Position', calculatePosition(parametersLabelPosition, fig));
         set(Variable_box, 'Position', calculatePosition(parametersBoxPosition, fig));
