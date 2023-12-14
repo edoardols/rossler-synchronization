@@ -8,14 +8,14 @@ function df = rosslerEquation(vals, a, b, c)
     % z = vals(3);
     
     % Rossler
-    du = -v - z;
-    dv = u + a*v;
-    dz = b + z*(u - c);
+    %du = -v - z;
+    %dv = u + a*v;
+    %dz = b + z*(u - c);
 
     % Paper
-    %du = a*u + v;
-    %dv = -u -z;
-    %dz = b + z*(v - c);
+    du = a*u + v;
+    dv = -u -z;
+    dz = b + z*(v - c);
     
     df = [du; dv; dz];
 end
