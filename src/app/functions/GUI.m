@@ -248,7 +248,7 @@ function GUI()
      end
      Update_status('Plot your node over time!',0);
      ColorButton(btn5)
-     NodeoverTime(t,trj);
+     NodeOverTime(t,trj);
     end
 %--------------------------------------------------------------------------
     %% Update_VariableBox
