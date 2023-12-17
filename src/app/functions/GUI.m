@@ -18,14 +18,16 @@ function GUI()
     button3Position = [0.2, 0.65, 0.6, 0.05];
     button4Position = [0.2, 0.60, 0.6, 0.05];
     button5Position = [0.2, 0.55, 0.6, 0.05];
+    button6Position = [0.2, 0.50, 0.6, 0.05];
+    button7Position = [0.2, 0.45, 0.6, 0.05];
+    button8Position = [0.2, 0.40, 0.6, 0.05];
+    parametersLabelPosition = [0.2, 0.3, 0.6, 0.05];
+    parametersBoxPosition = [0.2, 0.12, 0.6, 0.2];
 
-    parametersLabelPosition = [0.2, 0.50, 0.6, 0.05];
-    parametersBoxPosition = [0.2, 0.3, 0.6, 0.2];
+    commandWLabelPosition = [0.2, 0.08, 0.6, 0.05];
+    commandWBoxPosition = [0.2, 0.07, 0.6, 0.03];
 
-    commandWLabelPosition = [0.2, 0.22, 0.6, 0.05];
-    commandWBoxPosition = [0.2, 0.2, 0.6, 0.03];
-
-    versionLabelPosition = [0.2, 0.1, 0.6, 0.05];
+    versionLabelPosition = [0.2, 0.003, 0.6, 0.05];
 
     
     %% Create dropdown menu
@@ -39,7 +41,12 @@ function GUI()
     btn3 = uicontrol('Style', 'pushbutton', 'String', 'Trajectories', 'Position', calculatePosition(button3Position, fig), 'Callback', @funzione3);
     btn4 = uicontrol('Style', 'pushbutton', 'String', 'Trajectories Same Over Space', 'Position', calculatePosition(button4Position, fig), 'Callback', @funzione4);
     btn5 = uicontrol('Style', 'pushbutton', 'String', 'Node over time', 'Position', calculatePosition(button5Position, fig), 'Callback', @funzione5);
-    buttons=[btn0,btn1,btn2,btn3,btn4,btn5];
+    btn6 = uicontrol('Style', 'pushbutton', 'String', 'Lattice', 'Position', calculatePosition(button6Position, fig), 'Callback', @funzione6);
+    btn7 = uicontrol('Style', 'pushbutton', 'String', 'Save simulation', 'Position', calculatePosition(button7Position, fig), 'Callback', @funzione7);
+    btn8 = uicontrol('Style', 'pushbutton', 'String', 'Options', 'Position', calculatePosition(button8Position, fig), 'Callback', @funzione8);
+
+   
+    buttons=[btn0,btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8];
   
     figureResize = 1;
 
@@ -51,7 +58,7 @@ function GUI()
     CommandW_Label = uicontrol('Style', 'text', 'String', 'Command window: ', 'Position', calculatePosition(commandWLabelPosition, fig));
     CommandW_box = uicontrol('Style', 'text', 'String', 'Welcome user!', 'Position', calculatePosition(commandWBoxPosition, fig), 'BackgroundColor', 'white', 'HorizontalAlignment', 'left', 'FontSize', 8);
     %% Version label
-    VersionLabel = uicontrol('Style', 'text', 'String', 'V0.4.0', 'Position', calculatePosition(versionLabelPosition, fig));
+    VersionLabel = uicontrol('Style', 'text', 'String', 'V0.6.0', 'Position', calculatePosition(versionLabelPosition, fig));
    
  %-------------------------------------------------------------------------
     %% GUI Function
@@ -76,7 +83,9 @@ function GUI()
         set(btn3, 'Position', calculatePosition(button3Position, fig));
         set(btn4, 'Position', calculatePosition(button4Position, fig));
         set(btn5, 'Position', calculatePosition(button5Position, fig));
-
+        set(btn6, 'Position', calculatePosition(button6Position, fig));
+        set(btn7, 'Position', calculatePosition(button7Position, fig));
+        set(btn8, 'Position', calculatePosition(button8Position, fig));
         set(Variable_Label, 'Position', calculatePosition(parametersLabelPosition, fig));
         set(Variable_box, 'Position', calculatePosition(parametersBoxPosition, fig));
         set(CommandW_Label, 'Position', calculatePosition(commandWLabelPosition, fig));
@@ -96,12 +105,19 @@ function GUI()
      SpecialCase=1;
      t = 0;
      trj = 0;
-     T = [0 300];
+     THorizon = 0;
+     
      ActionOn=0;
     Update_VariableBox(N, Adj, IC, F, A, B, C) 
 %---------------------------------------------------------------------------
     %% Function to compute trajectories
     function simulateInput()
+        if THorizon == 0
+         Update_status('Choose an THorizon',2);
+         THorizon= Options(THorizon);
+         Update_status('THorizon setted!',2);
+        end
+        T=[0 THorizon];
         Update_status('Calculating the simulation',1)
         pause(3);
         [t, trj] = ode45(@networkEquation, T, IC, [], Adj, F, A, B, C);
@@ -237,7 +253,7 @@ function GUI()
         
     end
 
- %% Button: To add
+ %% Button: Plot single node over time
     function funzione5(~, ~) 
      if ActionOn == 0
         Update_status('Choose an action!',1)
@@ -249,6 +265,47 @@ function GUI()
      Update_status('Plot your node over time!',0);
      ColorButton(btn5)
      NodeOverTime(t,trj);
+    end
+
+ %% Button: Lattice
+    function funzione6(~, ~) 
+     if ActionOn == 0
+        Update_status('Choose an action!',1)
+        return;
+     end
+     if sim == 0
+        simulateInput()
+     end
+     Update_status('Plot in lattice mode!',0);
+     ColorButton(btn6)
+     %To add lattice plot
+    end
+
+ %% Button: Save simulation
+    function funzione7(~, ~) 
+     if ActionOn == 0
+        Update_status('Choose an action!',1)
+        return;
+     end
+     if sim == 0
+        simulateInput()
+     end
+     Update_status('Save your simulation!',0);
+     ColorButton(btn7)
+     SaveGUI(N, Adj, IC, F, A, B, C);
+     Update_status('Simulation saved!',0);
+    end
+
+ %% Button: Options
+    function funzione8(~, ~) 
+     Update_status('Change your option!',0);
+     ColorButton(btn8)
+     THorizon = Options(THorizon);
+     Update_status('Options are updated!',0);
+     if ActionOn == 1
+      simulateInput();
+     end
+    
     end
 %--------------------------------------------------------------------------
     %% Update_VariableBox
@@ -282,7 +339,7 @@ function GUI()
     end
 
     function ColorButton(button)
-     set(buttons, 'ForegroundColor', 'black'); 
+     set(buttons, 'ForegroundColor', 'black','FontWeight','normal'); 
      set(button, 'ForegroundColor',[0.4660 0.6740 0.1880],'FontWeight', 'bold'); 
     end
 end
