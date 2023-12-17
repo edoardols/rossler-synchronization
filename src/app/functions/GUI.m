@@ -113,7 +113,7 @@ function GUI()
     %% Function to compute trajectories
     function simulateInput()
         if THorizon == 0
-         Update_status('Choose an THorizon',2);
+         Update_status('Choose an THorizon',1);
          THorizon= Options(THorizon);
          Update_status('THorizon setted!',2);
         end
