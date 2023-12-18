@@ -1,0 +1,11 @@
+Simulation Name:  ciao
+Data & Time: 2023-12-17 15:48:51
+Network Parameters:
+N = 2
+Adj = [0 1;1 0]
+CI = [3 5;7 10]
+F = [1 1]
+A = [8 9]
+B = [2 1]
+C = [1 7]
+Comment: mare
