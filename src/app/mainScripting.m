@@ -10,12 +10,13 @@ addpath(genpath('functions'))
 
 %% Graph and Network Definition
 % Adjacency Matrix
-Adj = [0 1 0 0 0 1;
-       1 0 1 0 0 0;
-       0 1 0 1 0 0;
-       0 0 1 0 1 0;
-       0 0 0 1 0 1;
-       1 0 0 0 1 0];
+Adj = [0 1 0 0 0 1 0;
+       1 0 1 0 0 0 0; 
+       0 1 0 1 0 0 0;
+       0 0 1 0 1 0 0;
+       0 0 0 1 0 1 0;
+       1 0 0 0 1 0 0;
+       0 0 0 0 0 0 0];
 
 % Number of nodes in the Network
 N = size(Adj, 1);

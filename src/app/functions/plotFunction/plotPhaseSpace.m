@@ -6,7 +6,8 @@ function plotPhaseSpace(trj, N)
     
     % Evaluate the dimension of the grid
     rows = ceil(sqrt(N));
-    columns = floor(sqrt(N));
+    %columns = floor(sqrt(N));
+    columns = ceil(sqrt(N));
 
     figure
     sgtitle('Trajectories')
