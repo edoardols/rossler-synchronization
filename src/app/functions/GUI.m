@@ -203,7 +203,7 @@ function GUI()
         Update_status('Plotting graph',0);
         ColorButton(btn1)
         disp('Showing graphs sync!');
-        eqc = equivalenceClasses(trj);
+        [eqc, ~, ~] = equivalenceClasses(trj, Adj, 10);
         plotEquivalenceClasses(Adj, eqc);
         
     end
